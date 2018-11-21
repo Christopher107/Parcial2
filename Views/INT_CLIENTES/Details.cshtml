@@ -1,0 +1,50 @@
+﻿@model Parcial2.Models.INT_CLIENTES
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>INT_CLIENTES</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CliNombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CliNombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CliDireccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CliDireccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CliGiro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CliGiro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CliFonos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CliFonos)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CliRut }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

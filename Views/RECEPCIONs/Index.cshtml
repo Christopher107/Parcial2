@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Parcial2.Models.RECEPCION>
+
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RecFolio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecFechaRecepcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecFechaEntrega)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecLocalidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecCantidadMuestras)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.INT_CLIENTES.CliNombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LABORATORIOS.LabNombre)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecFolio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecFechaRecepcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecFechaEntrega)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecLocalidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecCantidadMuestras)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.INT_CLIENTES.CliNombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LABORATORIOS.LabNombre)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RecId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.RecId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.RecId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<section>
+    @Html.Action("Index","INT_CLIENTES")
+</section>
+
+<section>
+    @Html.Action("Index","LABORATORIOS")
+</section>

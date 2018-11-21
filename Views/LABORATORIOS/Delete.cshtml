@@ -1,0 +1,48 @@
+﻿@model Parcial2.Models.LABORATORIOS
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>LABORATORIOS</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LabNombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LabNombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LabMail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LabMail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LabDireccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LabDireccion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

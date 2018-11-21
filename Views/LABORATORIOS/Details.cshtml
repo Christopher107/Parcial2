@@ -1,0 +1,42 @@
+﻿@model Parcial2.Models.LABORATORIOS
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LABORATORIOS</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LabNombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LabNombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LabMail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LabMail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LabDireccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LabDireccion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LabId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

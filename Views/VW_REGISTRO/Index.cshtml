@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Parcial2.Models.VW_REGISTRO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FOLIO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FECHA_DE_RECEPCION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FECHA_DE_ENTREGA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NOMBRE_DEL_LABORATORIO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CANTIDAD_DE_MUESTRAS)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FOLIO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FECHA_DE_RECEPCION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FECHA_DE_ENTREGA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMBRE_DEL_LABORATORIO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CANTIDAD_DE_MUESTRAS)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RUT_DEL_CLIENTE }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RUT_DEL_CLIENTE }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RUT_DEL_CLIENTE })
+        </td>
+    </tr>
+}
+
+</table>

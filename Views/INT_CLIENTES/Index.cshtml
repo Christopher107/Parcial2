@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Parcial2.Models.INT_CLIENTES>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CliNombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CliDireccion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CliGiro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CliFonos)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CliNombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CliDireccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CliGiro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CliFonos)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CliRut }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CliRut }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CliRut })
+        </td>
+    </tr>
+}
+
+</table>

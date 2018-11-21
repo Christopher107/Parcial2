@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="parcial2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="INT_CLIENTES">
+    <Key>
+      <PropertyRef Name="CliRut" />
+    </Key>
+    <Property Name="CliRut" Type="Int32" Nullable="false" />
+    <Property Name="CliNombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CliDireccion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CliGiro" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CliFonos" Type="Int32" />
+    <NavigationProperty Name="RECEPCION" Relationship="Self.FK__RECEPCION__CliRu__276EDEB3" FromRole="INT_CLIENTES" ToRole="RECEPCION" />
+  </EntityType>
+  <EntityType Name="LABORATORIOS">
+    <Key>
+      <PropertyRef Name="LabId" />
+    </Key>
+    <Property Name="LabId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LabNombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="LabMail" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="LabDireccion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="RECEPCION" Relationship="Self.FK__RECEPCION__LabId__286302EC" FromRole="LABORATORIOS" ToRole="RECEPCION" />
+  </EntityType>
+  <EntityType Name="RECEPCION">
+    <Key>
+      <PropertyRef Name="RecId" />
+    </Key>
+    <Property Name="RecId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CliRut" Type="Int32" />
+    <Property Name="LabId" Type="Int32" />
+    <Property Name="RecFolio" Type="Int32" />
+    <Property Name="RecFechaRecepcion" Type="DateTime" Precision="0" />
+    <Property Name="RecFechaEntrega" Type="DateTime" Precision="0" />
+    <Property Name="RecLocalidad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="RecCantidadMuestras" Type="Int32" />
+    <NavigationProperty Name="INT_CLIENTES" Relationship="Self.FK__RECEPCION__CliRu__276EDEB3" FromRole="RECEPCION" ToRole="INT_CLIENTES" />
+    <NavigationProperty Name="LABORATORIOS" Relationship="Self.FK__RECEPCION__LabId__286302EC" FromRole="RECEPCION" ToRole="LABORATORIOS" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK__RECEPCION__CliRu__276EDEB3">
+    <End Role="INT_CLIENTES" Type="Self.INT_CLIENTES" Multiplicity="0..1" />
+    <End Role="RECEPCION" Type="Self.RECEPCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INT_CLIENTES">
+        <PropertyRef Name="CliRut" />
+      </Principal>
+      <Dependent Role="RECEPCION">
+        <PropertyRef Name="CliRut" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RECEPCION__LabId__286302EC">
+    <End Role="LABORATORIOS" Type="Self.LABORATORIOS" Multiplicity="0..1" />
+    <End Role="RECEPCION" Type="Self.RECEPCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LABORATORIOS">
+        <PropertyRef Name="LabId" />
+      </Principal>
+      <Dependent Role="RECEPCION">
+        <PropertyRef Name="LabId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="parcial2Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="INT_CLIENTES" EntityType="Self.INT_CLIENTES" />
+    <EntitySet Name="LABORATORIOS" EntityType="Self.LABORATORIOS" />
+    <EntitySet Name="RECEPCION" EntityType="Self.RECEPCION" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <AssociationSet Name="FK__RECEPCION__CliRu__276EDEB3" Association="Self.FK__RECEPCION__CliRu__276EDEB3">
+      <End Role="INT_CLIENTES" EntitySet="INT_CLIENTES" />
+      <End Role="RECEPCION" EntitySet="RECEPCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RECEPCION__LabId__286302EC" Association="Self.FK__RECEPCION__LabId__286302EC">
+      <End Role="LABORATORIOS" EntitySet="LABORATORIOS" />
+      <End Role="RECEPCION" EntitySet="RECEPCION" />
+    </AssociationSet>
+    <EntitySet Name="VW_REGISTRO" EntityType="parcial2Model.VW_REGISTRO" />
+  </EntityContainer>
+  <EntityType Name="VW_REGISTRO">
+    <Key>
+      <PropertyRef Name="RUT_DEL_CLIENTE" />
+    </Key>
+    <Property Name="FOLIO" Type="Int32" />
+    <Property Name="FECHA_DE_RECEPCION" Type="DateTime" Precision="0" />
+    <Property Name="FECHA_DE_ENTREGA" Type="DateTime" Precision="0" />
+    <Property Name="RUT_DEL_CLIENTE" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_DEL_LABORATORIO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CANTIDAD_DE_MUESTRAS" Type="Int32" />
+  </EntityType>
+</Schema>

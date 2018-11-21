@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="parcial2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="INT_CLIENTES">
+    <Key>
+      <PropertyRef Name="CliRut" />
+    </Key>
+    <Property Name="CliRut" Type="int" Nullable="false" />
+    <Property Name="CliNombre" Type="varchar" MaxLength="30" />
+    <Property Name="CliDireccion" Type="varchar" MaxLength="30" />
+    <Property Name="CliGiro" Type="varchar" MaxLength="30" />
+    <Property Name="CliFonos" Type="int" />
+  </EntityType>
+  <EntityType Name="LABORATORIOS">
+    <Key>
+      <PropertyRef Name="LabId" />
+    </Key>
+    <Property Name="LabId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LabNombre" Type="varchar" MaxLength="30" />
+    <Property Name="LabMail" Type="nvarchar" MaxLength="30" />
+    <Property Name="LabDireccion" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="RECEPCION">
+    <Key>
+      <PropertyRef Name="RecId" />
+    </Key>
+    <Property Name="RecId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CliRut" Type="int" />
+    <Property Name="LabId" Type="int" />
+    <Property Name="RecFolio" Type="int" />
+    <Property Name="RecFechaRecepcion" Type="date" />
+    <Property Name="RecFechaEntrega" Type="date" />
+    <Property Name="RecLocalidad" Type="varchar" MaxLength="30" />
+    <Property Name="RecCantidadMuestras" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'parcial2.dbo.VW_REGISTRO' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="VW_REGISTRO">
+    <Key>
+      <PropertyRef Name="RUT DEL CLIENTE" />
+    </Key>
+    <Property Name="FOLIO" Type="int" />
+    <Property Name="FECHA DE RECEPCION" Type="date" />
+    <Property Name="FECHA DE ENTREGA" Type="date" />
+    <Property Name="RUT DEL CLIENTE" Type="int" Nullable="false" />
+    <Property Name="NOMBRE DEL LABORATORIO" Type="varchar" MaxLength="30" />
+    <Property Name="CANTIDAD DE MUESTRAS" Type="int" />
+  </EntityType>
+  <Association Name="FK__RECEPCION__CliRu__276EDEB3">
+    <End Role="INT_CLIENTES" Type="Self.INT_CLIENTES" Multiplicity="0..1" />
+    <End Role="RECEPCION" Type="Self.RECEPCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INT_CLIENTES">
+        <PropertyRef Name="CliRut" />
+      </Principal>
+      <Dependent Role="RECEPCION">
+        <PropertyRef Name="CliRut" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RECEPCION__LabId__286302EC">
+    <End Role="LABORATORIOS" Type="Self.LABORATORIOS" Multiplicity="0..1" />
+    <End Role="RECEPCION" Type="Self.RECEPCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LABORATORIOS">
+        <PropertyRef Name="LabId" />
+      </Principal>
+      <Dependent Role="RECEPCION">
+        <PropertyRef Name="LabId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="parcial2ModelStoreContainer">
+    <EntitySet Name="INT_CLIENTES" EntityType="Self.INT_CLIENTES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LABORATORIOS" EntityType="Self.LABORATORIOS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RECEPCION" EntityType="Self.RECEPCION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VW_REGISTRO" EntityType="Self.VW_REGISTRO" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VW_REGISTRO].[FOLIO] AS [FOLIO], 
+    [VW_REGISTRO].[FECHA DE RECEPCION] AS [FECHA DE RECEPCION], 
+    [VW_REGISTRO].[FECHA DE ENTREGA] AS [FECHA DE ENTREGA], 
+    [VW_REGISTRO].[RUT DEL CLIENTE] AS [RUT DEL CLIENTE], 
+    [VW_REGISTRO].[NOMBRE DEL LABORATORIO] AS [NOMBRE DEL LABORATORIO], 
+    [VW_REGISTRO].[CANTIDAD DE MUESTRAS] AS [CANTIDAD DE MUESTRAS]
+    FROM [dbo].[VW_REGISTRO] AS [VW_REGISTRO]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__RECEPCION__CliRu__276EDEB3" Association="Self.FK__RECEPCION__CliRu__276EDEB3">
+      <End Role="INT_CLIENTES" EntitySet="INT_CLIENTES" />
+      <End Role="RECEPCION" EntitySet="RECEPCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RECEPCION__LabId__286302EC" Association="Self.FK__RECEPCION__LabId__286302EC">
+      <End Role="LABORATORIOS" EntitySet="LABORATORIOS" />
+      <End Role="RECEPCION" EntitySet="RECEPCION" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
